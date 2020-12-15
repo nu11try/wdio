@@ -1,26 +1,25 @@
 const Doctor = require("../pageobjects/doctor.page.js");
 const addFeature  = require('@wdio/allure-reporter').default
 
-addFeature.addFeature("Testing docdoc.ru/doctor");
 describe('docdoc', () => {
 
     // открытие стайта
     it('open web site', () => {
-        addFeature.createStep('open web site', 'open web site');
+        addFeature.addFeature('open web site');
         Doctor.open();
         expect(browser).toHaveTitle(Doctor.title_page);
     })
 
     // открытие фильтра
     it('open date filter', () => {
-        addFeature.createStep('open date filter', 'open date filter');
+        addFeature.addFeature('open date filter');
         browser.pause(3000);
         Doctor.open_filter()
     })
 
     // проверка дней в фильтре
     it('assert days in filter', () => {
-        addFeature.createStep('assert days in filter', 'assert days in filter');
+        addFeature.addFeature('assert days in filter');
         browser.pause(3000);
         // Проверка "Сегодня"
         expect(Doctor.get_text_date_element(0, index = true)).toEqual(Doctor.today_name);
@@ -36,20 +35,20 @@ describe('docdoc', () => {
 
     // проверка на название кнопки фильтра "Все дни"
     it('assert active day in filter', () => {
-        addFeature.createStep('assert active day in filter', 'assert active day in filter');
+        addFeature.addFeature('assert active day in filter');
         expect(Doctor.check_active(Doctor.all_day_selector, false)).toEqual(true);
     })
 
     // выбор "Завтра" в фильтре
     it('select day in filter', () => {
-        addFeature.createStep('select day in filter', 'select day in filter');
+        addFeature.addFeature('select day in filter');
         Doctor.select_tomorrow()
         browser.pause(3000);
     })
 
     // проверка текста кнопки на "Расписание на завтра"
     it('check button label', () => {
-        addFeature.createStep('check button label', 'check button label');
+        addFeature.addFeature('check button label');
         browser.waitUntil(
             () => Doctor.get_button_filter_label() === Doctor.title_button_filter_tommorow,
             {
@@ -62,13 +61,13 @@ describe('docdoc', () => {
 
     // получение количества карточек врачей
     it('count doctor searched', () => {
-        addFeature.createStep('count doctor searched', 'count doctor searched');
+        addFeature.addFeature('count doctor searched');
         expect(Doctor.count_doctor()).toEqual(10);
     })
 
     // проверка текста карточки докторов "Онлайн-расписание на "
     it('check doctor slot', () => {
-        addFeature.createStep('check doctor slot', 'check doctor slot');
+        addFeature.addFeature('check doctor slot');
         expect(Doctor.get_doctor_slot(1)).toEqual(true);
     })
 })
